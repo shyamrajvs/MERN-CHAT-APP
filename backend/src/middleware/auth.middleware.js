@@ -17,7 +17,8 @@ export const protectRoute = async (req, res, next) => {
         .json({ message: 'You are not authorized to access this route' });
     }
 
-    const user = await User.findOne(decoded.userId).select('-password');
+    // Use decoded.userID (matching the payload field name in generateToken)
+    const user = await User.findOne({ _id: decoded.userID }).select('-password');
 
     if (!user) {
       return res
@@ -26,7 +27,6 @@ export const protectRoute = async (req, res, next) => {
     }
 
     req.user = user;
-
     next();
   } catch (error) {
     console.log('Error in protectRoute middleware', error.message);
