@@ -6,8 +6,9 @@ import cors from "cors";
 import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
+import { app, server } from "./lib/socket.js";
 
-const app = express();
+
 dotenv.config();
 
 app.use(express.json({ limit: '50mb' }));
@@ -22,10 +23,11 @@ app.use(
 );
 
 app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`listening on http://localhost:${PORT}`);
+
+server.listen(PORT, () => {
+  console.log("server is running on PORT:" + PORT);
   connectDB();
 });

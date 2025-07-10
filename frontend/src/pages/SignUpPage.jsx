@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import {
   Eye,
@@ -10,6 +10,7 @@ import {
   User,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+
 import AuthImagePattern from "../components/AuthImagePattern";
 import toast from "react-hot-toast";
 
@@ -20,6 +21,7 @@ const SignUpPage = () => {
     email: "",
     password: "",
   });
+
   const { signup, isSigningUp } = useAuthStore();
 
   const validateForm = () => {
@@ -33,20 +35,27 @@ const SignUpPage = () => {
 
     return true;
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const success = validateForm();
+
     if (success === true) signup(formData);
   };
+
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
-      {/* left side*/}
-      <div className="flex flex-col justify-center p-6 sm:p-12">
+      {/* left side */}
+      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
-          {/* Logo */}
+          {/* LOGO */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <div
+                className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
+              group-hover:bg-primary/20 transition-colors"
+              >
                 <MessageSquare className="size-6 text-primary" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Create Account</h1>
@@ -55,6 +64,7 @@ const SignUpPage = () => {
               </p>
             </div>
           </div>
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="form-control">
               <label className="label">
@@ -75,6 +85,7 @@ const SignUpPage = () => {
                 />
               </div>
             </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Email</span>
@@ -94,6 +105,7 @@ const SignUpPage = () => {
                 />
               </div>
             </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Password</span>
@@ -124,6 +136,7 @@ const SignUpPage = () => {
                 </button>
               </div>
             </div>
+
             <button
               type="submit"
               className="btn btn-primary w-full"
@@ -139,6 +152,7 @@ const SignUpPage = () => {
               )}
             </button>
           </form>
+
           <div className="text-center">
             <p className="text-base-content/60">
               Already have an account?{" "}
@@ -149,7 +163,9 @@ const SignUpPage = () => {
           </div>
         </div>
       </div>
-      {/*right side */}
+
+      {/* right side */}
+
       <AuthImagePattern
         title="Join our community"
         subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
@@ -157,5 +173,4 @@ const SignUpPage = () => {
     </div>
   );
 };
-
 export default SignUpPage;
